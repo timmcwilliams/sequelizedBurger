@@ -1,0 +1,49 @@
+<h1>burger!</h1>
+
+<h2>ALL BURGERS</h2>
+<ul>
+  <p>ALL</p>
+  {{#each burgers}}
+  <li>
+    <p>ID: {{this.id}}</p>
+    <p>{{this.burger_name}}</p>
+
+  </li>
+  {{/each}}
+</ul>
+<br>
+<p>DEVOURED BURGERS</p>
+
+<ul>
+  {{#each burgers}} {{#if devoured}} {{> burgers/burger-block devoured=true}}
+  <p>{{this.burger_name}}</p>
+  {{/if}} {{/each}}
+</ul>
+
+<h2>Burgers that NOT devoured!</h2>
+<ul>
+  {{#each burgers}} {{#unless devoured}} {{> burgers/burger-block devoured=true}}
+  <p>{{this.burger_name}}</p>
+  {{/unless}} {{/each}}
+</ul>
+
+<h2>Add a burger!! - No Tofu Allowed!</h2>
+
+<form method="POST" action="/api/burgers">
+  <label for="burger_name">Burger Name:</label>
+  <input type="text" id="burger" name="name">
+  <button type="submit">Add burger</button>
+  <label for="devor">Eaten?</label>
+  <br>
+  <input type="radio" name="devoured" value="1" checked> Yum!
+  <br>
+  <input type="radio" name="not-devored" value="0"> Not Sure?
+</form>
+
+<form method="DELETE" action="/api/burgers/">
+  <label for="id">Burger ID:</label>
+  <input type="text" id="id" name="burger_name">
+  <button type="submit">DELETE BURGER</button>
+  <br>
+  <input type="radio" name="id" value="id"> DELETING
+</form>
